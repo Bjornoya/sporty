@@ -8,7 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ALL_SPORTS } from '../../utils/constants'
+
+const ALL_SPORTS = 'all'
 
 type LeagueFiltersProps = {
   query: string
@@ -31,7 +32,7 @@ export const LeagueFilters = ({
   onSportChange,
   onClear,
 }: LeagueFiltersProps) => {
-  const hasFilters = query.trim().length > 0 || sport !== ALL_SPORTS
+  const hasFilters = query.trim().length > 0 || Boolean(sport)
 
   return (
     <section className="space-y-3">
@@ -47,7 +48,10 @@ export const LeagueFilters = ({
             autoComplete="off"
           />
         </label>
-        <Select value={sport} onValueChange={onSportChange}>
+        <Select
+          value={sport || ALL_SPORTS}
+          onValueChange={(value) => onSportChange(value === ALL_SPORTS ? '' : value)}
+        >
           <SelectTrigger
             className="h-10 w-full data-[size=default]:h-10 sm:w-56"
             aria-label="Filter by sport"
