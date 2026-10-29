@@ -3,7 +3,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import type { LeagueDetails } from '../../types/League'
-import { toExternalUrl } from '../../utils/toExternalUrl'
 
 type LeagueProfileProps = {
   league: LeagueDetails
@@ -31,7 +30,11 @@ function MetaItem({
 
 export const LeagueProfile = ({ league }: LeagueProfileProps) => {
   const cover = league.strBanner ?? league.strFanart1
-  const website = league.strWebsite ? toExternalUrl(league.strWebsite) : null
+  const website = league.strWebsite
+    ? league.strWebsite.startsWith('http://') || league.strWebsite.startsWith('https://')
+      ? league.strWebsite
+      : `https://${league.strWebsite}`
+    : null
 
   return (
     <article className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
