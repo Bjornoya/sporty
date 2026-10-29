@@ -19,12 +19,6 @@ function isValidQueryParamValue(value: unknown): value is QueryParamPrimitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
 }
 
-function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
-
 const handleSuccessResponse = async (response: Response) => {
   if (response.status === 204) {
     return {}
@@ -97,23 +91,14 @@ const request = async <TResponse>({
   const endpoint = createEndpointUrl(url, queryParams)
   const body = data === undefined ? undefined : JSON.stringify(data)
 
-  const execute = async (attempt: number): Promise<TResponse> => {
-    const response = await fetch(endpoint, {
-      method,
-      headers,
-      body,
-      ...options,
-    })
+  const response = await fetch(endpoint, {
+    method,
+    headers,
+    body,
+    ...options,
+  })
 
-    if (response.status === 429 && attempt < 2) {
-      await wait(1500 * (attempt + 1))
-      return execute(attempt + 1)
-    }
-
-    return handleResponse(response) as Promise<TResponse>
-  }
-
-  return execute(0)
+  return handleResponse(response) as Promise<TResponse>
 }
 
 export const api = {

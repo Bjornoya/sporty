@@ -1,2 +1,2 @@
-export const DEFAULT_QUERY_STALE_TIME = 10 * 1000;
-export const LIST_QUERY_STALE_TIME = 3 * 60 * 1000;
+export const DEFAULT_QUERY_STALE_TIME = 30 * 60 * 1000
+export const DEFAULT_QUERY_GC_TIME = 24 * 60 * 60 * 1000
