@@ -4,17 +4,17 @@ import { Button } from '@/components/ui/button'
 
 type QueryErrorProps = {
   message: string
-  onRetry: () => void
+  onReset: () => void
 }
 
-export function QueryError({ message, onRetry }: QueryErrorProps) {
+export function QueryError({ message, onReset }: QueryErrorProps) {
   return (
     <Alert variant="destructive" className="p-4">
       <AlertCircle />
       <AlertTitle>Could not load data</AlertTitle>
       <AlertDescription>{message}</AlertDescription>
       <div className="col-start-2 mt-3">
-        <Button type="button" variant="outline" className="min-w-28 px-6" onClick={onRetry}>
+        <Button type="button" variant="outline" className="min-w-28 px-6" onClick={onReset}>
           Retry
         </Button>
       </div>
