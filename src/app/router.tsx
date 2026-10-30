@@ -1,8 +1,8 @@
-import { lazy, Suspense } from 'react'
+import { lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
-import { LeagueProfileLoader } from '@/features/leagues/components/LeagueProfileLoader/LeagueProfileLoader'
 import { NotFoundPage } from '@/pages/404/NotFoundPage'
+import { LeaguePageLayout } from '@/pages/leagues/[id]/LeaguePageLayout'
 import { LeaguesPage } from '@/pages/leagues/LeaguesPage'
 
 const LeaguePage = lazy(() =>
@@ -15,14 +15,9 @@ export function AppRouter() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<LeaguesPage />} />
-          <Route
-            path="leagues/:leagueId"
-            element={
-              <Suspense fallback={<LeagueProfileLoader />}>
-                <LeaguePage />
-              </Suspense>
-            }
-          />
+          <Route path="leagues/:leagueId" element={<LeaguePageLayout />}>
+            <Route index element={<LeaguePage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
