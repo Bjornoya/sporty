@@ -40,7 +40,15 @@ export const LeagueProfile = ({ leagueId }: LeagueProfileProps) => {
       <article className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
       <div className="relative min-h-40 bg-muted">
         {cover ? (
-          <img src={cover} alt="" className="h-40 w-full object-cover sm:h-56" />
+          <img
+            src={cover}
+            alt=""
+            width={1200}
+            height={224}
+            fetchPriority="high"
+            decoding="async"
+            className="h-40 w-full object-cover sm:h-56"
+          />
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent" />
       </div>
@@ -51,6 +59,9 @@ export const LeagueProfile = ({ leagueId }: LeagueProfileProps) => {
               <img
                 src={league.strBadge ?? league.strLogo ?? ''}
                 alt={`${league.strLeague} badge`}
+                width={64}
+                height={64}
+                decoding="async"
                 className="size-16 object-contain"
               />
             ) : (
