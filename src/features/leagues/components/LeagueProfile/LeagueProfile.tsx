@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { useLeague } from '../../hooks/useLeague'
+import { toWebsiteUrl } from '../../utils/toWebsiteUrl'
 import { LeagueProfileTeams } from '../LeagueProfileTeams/LeagueProfileTeams'
 
 type LeagueProfileProps = {
@@ -32,11 +33,7 @@ function MetaItem({
 export const LeagueProfile = ({ leagueId }: LeagueProfileProps) => {
   const { data: league } = useLeague(leagueId)
   const cover = league.strBanner ?? league.strFanart1
-  const website = league.strWebsite
-    ? league.strWebsite.startsWith('http://') || league.strWebsite.startsWith('https://')
-      ? league.strWebsite
-      : `https://${league.strWebsite}`
-    : null
+  const website = toWebsiteUrl(league.strWebsite)
 
   return (
     <div className="space-y-6">
