@@ -37,7 +37,15 @@ function TeamCard({ team }: { team: Team }) {
       <CardHeader className="flex flex-row items-center gap-3">
         <div className="flex size-10 items-center justify-center overflow-hidden rounded-lg bg-muted">
           {team.strBadge ? (
-            <img src={team.strBadge} alt="" className="size-8 object-contain" loading="lazy" />
+            <img
+              src={team.strBadge}
+              alt=""
+              width={32}
+              height={32}
+              loading="lazy"
+              decoding="async"
+              className="size-8 object-contain"
+            />
           ) : (
             <Shield className="size-4 text-muted-foreground" />
           )}
