@@ -2,10 +2,11 @@ import { Calendar, ExternalLink, Flag, Trophy, Users } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import type { LeagueDetails } from '../../types/League'
+import { useLeague } from '../../hooks/useLeague'
+import { LeagueProfileTeams } from '../LeagueProfileTeams/LeagueProfileTeams'
 
 type LeagueProfileProps = {
-  league: LeagueDetails
+  leagueId: string
 }
 
 function MetaItem({
@@ -28,7 +29,8 @@ function MetaItem({
   )
 }
 
-export const LeagueProfile = ({ league }: LeagueProfileProps) => {
+export const LeagueProfile = ({ leagueId }: LeagueProfileProps) => {
+  const { data: league } = useLeague(leagueId)
   const cover = league.strBanner ?? league.strFanart1
   const website = league.strWebsite
     ? league.strWebsite.startsWith('http://') || league.strWebsite.startsWith('https://')
@@ -37,7 +39,8 @@ export const LeagueProfile = ({ league }: LeagueProfileProps) => {
     : null
 
   return (
-    <article className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
+    <div className="space-y-6">
+      <article className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
       <div className="relative min-h-40 bg-muted">
         {cover ? (
           <img src={cover} alt="" className="h-40 w-full object-cover sm:h-56" />
@@ -93,5 +96,7 @@ export const LeagueProfile = ({ league }: LeagueProfileProps) => {
         ) : null}
       </div>
     </article>
+      <LeagueProfileTeams leagueName={league.strLeague} />
+    </div>
   )
 }
