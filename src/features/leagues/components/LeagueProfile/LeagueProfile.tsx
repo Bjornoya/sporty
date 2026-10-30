@@ -70,8 +70,14 @@ export const LeagueProfile = ({ leagueId }: LeagueProfileProps) => {
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="secondary">{league.strSport}</Badge>
-              {league.strGender ? <Badge variant="outline">{league.strGender}</Badge> : null}
+              <Badge className="h-6 border-transparent bg-foreground px-2.5 text-background">
+                {league.strSport}
+              </Badge>
+              {league.strGender ? (
+                <Badge className="h-6 border-transparent bg-foreground px-2.5 text-background">
+                  {league.strGender}
+                </Badge>
+              ) : null}
             </div>
             <h1 className="mt-2 font-heading text-3xl font-medium tracking-tight sm:text-4xl">
               {league.strLeague}
