@@ -1,4 +1,5 @@
 import { SearchX } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
 import type { League } from '../../types/League'
 import { LeagueCard } from '../LeagueCard/LeagueCard'
 
@@ -7,6 +8,8 @@ type LeagueGridProps = {
 }
 
 export const LeagueGrid = ({ leagues }: LeagueGridProps) => {
+  const { search } = useLocation()
+
   if (leagues.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-dashed px-4 py-16 text-center">
@@ -23,7 +26,7 @@ export const LeagueGrid = ({ leagues }: LeagueGridProps) => {
     <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {leagues.map((league) => (
         <li key={league.idLeague}>
-          <LeagueCard league={league} />
+          <LeagueCard league={league} search={search} />
         </li>
       ))}
     </ul>

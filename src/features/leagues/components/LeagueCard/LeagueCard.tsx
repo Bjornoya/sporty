@@ -1,19 +1,18 @@
 import { ChevronRight } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import type { League } from '../../types/League'
 
 type LeagueCardProps = {
   league: League
+  search: string
 }
 
-export const LeagueCard = ({ league }: LeagueCardProps) => {
-  const location = useLocation()
-
+export const LeagueCard = ({ league, search }: LeagueCardProps) => {
   return (
     <Link
-      to={`/leagues/${league.idLeague}${location.search}`}
+      to={`/leagues/${league.idLeague}${search}`}
       className="group block h-full rounded-xl focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
     >
       <Card className="h-full transition-colors group-hover:bg-muted/40 group-hover:ring-foreground/20">
